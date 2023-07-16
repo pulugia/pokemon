@@ -1,7 +1,7 @@
 FROM python
 LABEL maintainer "Pulugia <pulugia57@gmail.com>"
 
-ENV DATAPATH='/data'
+ENV DATAPATH='/data/'
 RUN pip3 install flask numpy pandas
 
 COPY data/ /data
