@@ -23,6 +23,12 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install numpy
+        python -m pip install pandas
+        python -m pip install flask
     - name: Test with pytest
       run: |
         python3 attack/pokemon_att.py
