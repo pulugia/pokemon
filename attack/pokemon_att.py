@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import os
+
 
 poke_name = 'Latios' # input("Who's that pokemon! : ")
 skill_name = 'Draco Meteor' # input("Go pokemon! : ")
@@ -7,9 +9,13 @@ IV = [31, 0, 31, 31, 31, 31] # list(map(int, input("IV? : ").split(',')))
 EV = [6, 0, 0, 252, 0, 252]   # list(map(int, input("EV? : ").split(',')))
 Personality_name = 'Modest' #input('What is your pokemon's PERSONALITY! : ')
 
-pokemon = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/data/pokemon.csv')
-Personality_df = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/data/Personality.csv')
-skill_df = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/data/pokemon_skill.csv')
+data_path = os.environ.get('DATAPATH')
+if data_path is None:
+    data_path = 'C:/Users/040/Desktop/docker/pokemon/data/'
+
+pokemon = pd.read_csv(data_path + 'pokemon.csv')
+Personality_df = pd.read_csv(data_path + 'Personality.csv')
+skill_df = pd.read_csv(data_path + 'pokemon_skill.csv')
 df = pokemon.copy()
 df.drop(['number', 'total', 'generation', 'legendary'], axis=1, inplace=True)
 
@@ -49,4 +55,8 @@ if skill_class == 'physical':
 if skill_class == 'special':
     damage = int((real_stats[3] * int(skill_dmg)) * weight)
 
-print(damage)
+sav_data = [skill_type, skill_class, damage]
+att_data = pd.read_csv(data_path + 'att_data.csv')
+att_data = att_data.iloc[:, 1:]
+att_data.loc[len(att_data)] = sav_data
+att_data.to_csv(data_path + 'att_data.csv')

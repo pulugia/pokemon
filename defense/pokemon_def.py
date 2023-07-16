@@ -1,13 +1,19 @@
 import numpy as np
 import pandas as pd
+import os
+
 
 poke_name = 'Latios' # input("Who's that pokemon! : ")
 IV = [31, 0, 31, 31, 31, 31] # list(map(int, input("IV? : ").split(',')))
 EV = [6, 0, 0, 252, 0, 252]   # list(map(int, input("EV? : ").split(',')))
 Personality_name = 'Modest' #input('What is your pokemon's PERSONALITY! : ')
 
-pokemon = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/data/pokemon.csv')
-Personality_df = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/data/Personality.csv')
+data_path = os.environ.get('DATAPATH')
+if data_path is None:
+    data_path = 'C:/Users/040/Desktop/docker/pokemon/data/'
+
+pokemon = pd.read_csv(data_path + 'pokemon.csv')
+Personality_df = pd.read_csv(data_path + 'Personality.csv')
 df = pokemon.copy()
 df.drop(['number', 'total', 'generation', 'legendary'], axis=1, inplace=True)
 
@@ -35,4 +41,10 @@ def_num = {}
 
 def_num['physical'] = int(real_stats[0] * real_stats[2] * weight / 0.411)
 def_num['special'] = int(real_stats[0] * real_stats[4] * weight / 0.411)
-print(def_num)
+
+
+sav_data = [poke_type.values[0][0], poke_type.values[0][1], def_num['physical'], def_num['special']]
+def_data = pd.read_csv(data_path + 'def_data.csv')
+def_data = def_data.iloc[:, 1:]
+def_data.loc[len(def_data)] = sav_data
+def_data.to_csv(data_path + 'def_data.csv')
