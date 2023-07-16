@@ -25,4 +25,4 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Test with pytest
       run: |
-        python3 pokemon_att.py
+        python3 attack/pokemon_att.py
