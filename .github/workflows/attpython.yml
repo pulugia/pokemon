@@ -33,4 +33,4 @@ jobs:
       run: |
         python3 attack/pokemon_att.py
       env:
-        DATAPATH: "../data/"
+        DATAPATH: "pokemon/data/"
