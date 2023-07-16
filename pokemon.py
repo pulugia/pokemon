@@ -7,9 +7,9 @@ IV = [31, 0, 31, 31, 31, 31] # list(map(int, input("IV? : ").split(',')))
 EV = [6, 0, 0, 252, 0, 252]   # list(map(int, input("EV? : ").split(',')))
 Personality_name = 'Modest' #input('What is your pokemon's PERSONALITY! : ')
 
-pokemon = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/pokemon.csv')
-Personality_df = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/Personality.csv')
-skill_df = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/pokemon_skill.csv')
+pokemon = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/data/pokemon.csv')
+Personality_df = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/data/Personality.csv')
+skill_df = pd.read_csv('C:/Users/040/Desktop/docker/pokemon/data/pokemon_skill.csv')
 df = pokemon.copy()
 df.drop(['number', 'total', 'generation', 'legendary'], axis=1, inplace=True)
 
